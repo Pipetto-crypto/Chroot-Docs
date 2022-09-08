@@ -1,0 +1,107 @@
+#!/bin/sh
+
+CHROOT_DIR=/data/local/mnt
+INTERNAL_STORAGE=/sdcard
+EXTERNAL_STORAGE=/mnt/media_rw/$(sudo ls /mnt/media_rw)
+TEST1=$1
+TEST2=$2
+
+start(){
+if [ ! -d "$CHROOT_DIR/home" ];
+then
+	echo "\n"
+	echo "Initializing audio server before startup"
+		pulseaudio --start --exit-idle-time=-1
+		pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
+	echo "\n"
+	echo "Starting the chroot"
+	echo "\n"
+		su -c /data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy start -m
+	echo "\n"
+	echo "Binding internal storage"
+		sudo bindfs -o perms=a+rwx -o nonempty $INTERNAL_STORAGE $CHROOT_DIR/media/internal_storage
+	echo "\n"
+	echo "Binding external storage"
+		sudo bindfs -o perms=a+rwx -o nonempty $EXTERNAL_STORAGE $CHROOT_DIR/media/external_sd
+	echo "\n"
+	echo "Enabling binfmt"
+		su -c /data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy shell -u android sudo update-binfmts --enable > /dev/null 2>&1
+	echo "\n"
+	if [ "$TEST2" = "-w" ];
+	then
+		echo "Creating wayland socket"
+		sudo ln -sf $CHROOT_DIR/tmp/runtime-android $PREFIX/xwayland
+		sudo chmod 777 $PREFIX/xwayland
+		XDG_RUNTIME_DIR=$PREFIX/xwayland termux-x11 &  
+		pid=$!
+		sleep 10
+		kill $pid
+		sudo chmod 755 $CHROOT_DIR/tmp/runtime-android
+		sudo chmod 777 $PREFIX/xwayland/wayland-0
+
+	fi
+	echo "All preparations completed, connecting now"
+	echo "\n"
+	ssh android@localhost
+
+else
+	echo "Chroot has been already mounted, accessing"
+	ssh android@localhost
+fi
+
+
+}
+
+stop(){
+
+echo "Deleting stale symlinks and files"
+if [ -d "$PREFIX/wayland" ];
+then
+
+	sudo rm -rf $PREFIX/xwayland/wayland-0
+	rm $PREFIX/xwayland
+fi
+echo "\n"
+su -c /data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy stop -u
+
+}
+
+help(){
+
+echo "\n"
+echo "A basic script to integrate Linux-Deploy with Termux. It launches your linux chroots with audio, internal and external storage and a X server to use with Termux:X11"
+echo "\n"
+echo "Options:"
+echo "\n"
+echo "start - Launches the chroot, run -w option to start the Xwayland server"
+echo "stop -  Stops the chroot"
+echo "help -  Print this help page"
+echo "\n"
+}
+
+while [ True ];
+do
+	
+	if [ "$TEST1" = "stop" ];
+	then
+		stop
+		break
+	elif [ "$TEST1" = "start" ];
+        then    
+		start
+		break
+	elif [ "$TEST1" = "help" ];
+	then
+		help
+		break
+        else 
+		echo "\n"
+		echo "No option specified"
+		echo "\n"
+		help
+                break
+	fi	
+
+done
+
+
