@@ -2,6 +2,7 @@
 
 CHROOT_DIR=/data/local/mnt
 INTERNAL_STORAGE=/sdcard
+DEPLOY=/data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy
 EXTERNAL_STORAGE=/mnt/media_rw/$(sudo ls /mnt/media_rw)
 TEST1=$1
 TEST2=$2
@@ -14,7 +15,7 @@ echo "Creating wayland socket"
 		sudo chmod 777 $PREFIX/xwayland
 		XDG_RUNTIME_DIR=$PREFIX/xwayland termux-x11 &  
 		pid=$!
-		sleep 10
+		sleep 15
 		kill $pid
 		sudo chmod 755 $CHROOT_DIR/tmp/runtime-android
 		sudo chmod 777 $PREFIX/xwayland/wayland-0
@@ -31,7 +32,7 @@ then
 	echo "\n"
 	echo "Starting the chroot"
 	echo "\n"
-		su -c /data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy start -m
+		su -c $DEPLOY start -m
 	echo "\n"
 	echo "Binding internal storage"
 		sudo bindfs -o perms=a+rwx -o nonempty $INTERNAL_STORAGE $CHROOT_DIR/media/internal_storage
@@ -40,11 +41,13 @@ then
 		sudo bindfs -o perms=a+rwx -o nonempty $EXTERNAL_STORAGE $CHROOT_DIR/media/external_sd
 	echo "\n"
 	echo "Enabling binfmt"
-		su -c /data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy shell -u android sudo update-binfmts --enable > /dev/null 2>&1
+		su -c $DEPLOY shell -u android sudo update-binfmts --enable > /dev/null 2>&1
 	echo "\n"
 	if [ "$TEST2" = "-w" ];
 	then
 		xwayland
+		su -c $DEPLOY shell -u android export XDG_RUNTIME_DIR=/tmp/runtime-android > /dev/null 2>&1
+		su -c $DEPLOY shell -u android Xwayland :0 -noreset & > /dev/null 2>&1
 	fi
 	echo "All preparations completed, connecting now"
 	echo "\n"
