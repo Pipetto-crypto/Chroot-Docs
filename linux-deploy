@@ -6,6 +6,21 @@ EXTERNAL_STORAGE=/mnt/media_rw/$(sudo ls /mnt/media_rw)
 TEST1=$1
 TEST2=$2
 
+xwayland(){
+
+
+echo "Creating wayland socket"
+		sudo ln -sf $CHROOT_DIR/tmp/runtime-android $PREFIX/xwayland
+		sudo chmod 777 $PREFIX/xwayland
+		XDG_RUNTIME_DIR=$PREFIX/xwayland termux-x11 &  
+		pid=$!
+		sleep 10
+		kill $pid
+		sudo chmod 755 $CHROOT_DIR/tmp/runtime-android
+		sudo chmod 777 $PREFIX/xwayland/wayland-0
+
+}
+
 start(){
 if [ ! -d "$CHROOT_DIR/home" ];
 then
@@ -29,16 +44,7 @@ then
 	echo "\n"
 	if [ "$TEST2" = "-w" ];
 	then
-		echo "Creating wayland socket"
-		sudo ln -sf $CHROOT_DIR/tmp/runtime-android $PREFIX/xwayland
-		sudo chmod 777 $PREFIX/xwayland
-		XDG_RUNTIME_DIR=$PREFIX/xwayland termux-x11 &  
-		pid=$!
-		sleep 10
-		kill $pid
-		sudo chmod 755 $CHROOT_DIR/tmp/runtime-android
-		sudo chmod 777 $PREFIX/xwayland/wayland-0
-
+		xwayland
 	fi
 	echo "All preparations completed, connecting now"
 	echo "\n"
