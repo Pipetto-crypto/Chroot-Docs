@@ -4,8 +4,8 @@ CHROOT_DIR=/data/local/mnt
 INTERNAL_STORAGE=/sdcard
 DEPLOY=/data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy
 EXTERNAL_STORAGE=/mnt/media_rw/$(sudo ls /mnt/media_rw)
-TEST1=$1
-TEST2=$2
+ARG1=$1
+ARG2=$2
 
 xwayland(){
 
@@ -43,7 +43,7 @@ then
 	echo "Enabling binfmt"
 		su -c $DEPLOY shell -u android sudo update-binfmts --enable > /dev/null 2>&1
 	echo "\n"
-	if [ "$TEST2" = "-w" ];
+	if [ "$ARG2" = "-w" ];
 	then
 		xwayland
 		su -c $DEPLOY shell -u android export XDG_RUNTIME_DIR=/tmp/runtime-android > /dev/null 2>&1
@@ -91,15 +91,15 @@ echo "\n"
 while [ True ];
 do
 	
-	if [ "$TEST1" = "stop" ];
+	if [ "$ARG1" = "stop" ];
 	then
 		stop
 		break
-	elif [ "$TEST1" = "start" ];
+	elif [ "$ARG1" = "start" ];
         then    
 		start
 		break
-	elif [ "$TEST1" = "help" ];
+	elif [ "$ARG1" = "help" ];
 	then
 		help
 		break
