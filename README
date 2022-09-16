@@ -2,6 +2,7 @@ Some of the files used in my setup, mainly the script I wrote to warp everything
 
 It doesn't install the chroot nor the dependencies required to run, so before you use it install these in termux:
 
+pkg install root-repo
 pkg install pulseaudio bindfs 
 
 Use this guide to install Termux-X11:
