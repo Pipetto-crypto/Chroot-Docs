@@ -1,0 +1,17 @@
+Some of the files used in my setup, mainly the script I wrote to warp everything up.
+
+It doesn't install the chroot nor the dependencies required to run, so before you use it install these in termux:
+
+pkg install pulseaudio bindfs 
+
+Use this guide to install Termux-X11:
+
+https://udroid-rc.gitbook.io/udroid-wiki/udroid-landing/quick-installation-and-usage/setting-up-gui/termux-x11
+
+
+It requires to have Linux Deploy installed which you will have to use to make the chroot first(tested only with Debian Bullseye, works with everything but you will need to downgrade Xwayland package if above 1.20.11).
+
+If you set a different username than android change it in the script as well.
+
+Read the text file in the folders to understand how to use the config files there
+

@@ -1,0 +1,6 @@
+Put these in your .bashrc
+
+export PATH=~/wine/bin:~/wine64/bin:$PATH
+alias win32='WINEPREFIX=~/.wine32 WINEARCH=win32'
+
+To create a wine32 prefix run win32 wine winecfg in terminal, everytime you want to run a win32 app run win32 wine(this is not needed if you have the app installed and you have binfmt support in kernel)
