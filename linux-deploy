@@ -46,8 +46,6 @@ then
 	if [ "$ARG2" = "-w" ];
 	then
 		xwayland
-		su -c $DEPLOY shell -u android export XDG_RUNTIME_DIR=/tmp/runtime-android > /dev/null 2>&1
-		su -c $DEPLOY shell -u android Xwayland :0 -noreset & > /dev/null 2>&1
 	fi
 	echo "All preparations completed, connecting now"
 	echo "\n"
@@ -63,10 +61,9 @@ fi
 
 stop(){
 
-echo "Deleting stale symlinks and files"
 if [ -d "$PREFIX/wayland" ];
 then
-
+	echo "Deleting stale symlinks and files"
 	sudo rm -rf $PREFIX/xwayland/wayland-0
 	rm $PREFIX/xwayland
 fi
