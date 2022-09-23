@@ -9,6 +9,7 @@ Use this guide to install Termux-X11:
 
 https://udroid-rc.gitbook.io/udroid-wiki/udroid-landing/quick-installation-and-usage/setting-up-gui/termux-x11
 
+For more information about the termux-x11 setup, refer to the guide in the termux-x11 folder you find here
 
 It requires to have Linux Deploy installed which you will have to use to make the chroot first(tested only with Debian Bullseye, works with everything but you will need to downgrade Xwayland package if above 1.20.11).
 

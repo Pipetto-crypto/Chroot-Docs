@@ -1,0 +1,6 @@
+#!/bin/sh
+
+taskset -c 4-7 Xwayland :0 &
+sleep 3
+taskset -c 4-7 dbus-launch --exit-with-session startlxqt &
+
