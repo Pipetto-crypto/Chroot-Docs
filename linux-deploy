@@ -13,12 +13,20 @@ xwayland(){
 echo "Creating wayland socket"
 		sudo ln -sf $CHROOT_DIR/tmp/runtime-android $PREFIX/xwayland
 		sudo chmod 777 $PREFIX/xwayland
-		XDG_RUNTIME_DIR=$PREFIX/xwayland termux-x11 &  
+		XDG_RUNTIME_DIR=$PREFIX/xwayland taskset -c 4-7 termux-x11 &  
 		pid=$!
 		sleep 15
 		kill $pid
 		sudo chmod 755 $CHROOT_DIR/tmp/runtime-android
 		sudo chmod 777 $PREFIX/xwayland/wayland-0
+
+}
+
+sparkle(){
+
+echo "Setting sparkle up"
+sudo mount --bind /data/data/com.sion.sparkle/files $CHROOT_DIR/sparkle
+
 
 }
 
@@ -46,6 +54,9 @@ then
 	if [ "$ARG2" = "-w" ];
 	then
 		xwayland
+	elif [ "$ARG2" = "-s" ];
+	then
+		sparkle
 	fi
 	echo "All preparations completed, connecting now"
 	echo "\n"
@@ -75,11 +86,11 @@ su -c /data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy stop -u
 help(){
 
 echo "\n"
-echo "A basic script to integrate Linux-Deploy with Termux. It launches your linux chroots with audio, internal and external storage and a X server to use with Termux:X11"
+echo "A basic script to integrate Linux-Deploy with Termux. It launches your linux chroots with audio, internal and external storage and a X server to use with Termux:X11 or Sparkle"
 echo "\n"
 echo "Options:"
 echo "\n"
-echo "start - Launches the chroot, run -w option to start the Xwayland server"
+echo "start - Launches the chroot, run -w option to start the Xwayland server with Termux-X11 or -s for Sparkle"
 echo "stop -  Stops the chroot"
 echo "help -  Print this help page"
 echo "\n"
