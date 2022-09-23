@@ -30,6 +30,7 @@ then
 	curl https://raw.githubusercontent.com/Pipetto-crypto/Chroot-Docs/main/sparkle/sparkle.sh > sparkle.sh
 	sudo mv sparkle.sh $CHROOT_DIR/bin/sparkle
 	sudo chmod a+x $CHROOT_DIR/bin/sparkle
+fi
 
 sudo mount --bind /data/data/com.sion.sparkle/files $CHROOT_DIR/sparkle
 
