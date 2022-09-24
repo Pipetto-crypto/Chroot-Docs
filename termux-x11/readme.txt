@@ -2,8 +2,6 @@ Use this guide to install Termux-X11:
 
 https://udroid-rc.gitbook.io/udroid-wiki/udroid-landing/quick-installation-and-usage/setting-up-gui/termux-x11
 
-Here you can find the script I use in the chroot to start the Xwayland server and eventually start a desktop environment, lxqt in my case. It requires to have Xwayland installed in the chroot (sudo apt install xwayland, only tested with 1.20.11 version)
+In the chroot, install Xwayland with apt ( sudo apt install Xwayland ) then to start the Xwayland server launch the chroot with the -w option ( linux deploy start -w)
 
-This script will be installed in the chroot the moment you run the -w option for the first time (linux-deploy start -w)
-
-Refer to this and modify it in /usr/bin/termux-x11 according to your setup, for example if you use a different DE compared to lxqt.
+The first time you use the -w option, it will install the script you can find here in /usr/bin. You are free to modify it according to your needs
