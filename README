@@ -1,7 +1,7 @@
 Collection of scripts, docs that I used to setup my chroot. It's highly suggested that you download this repo and extract it somewhere on your device, all the docs here will assume that you did.
 
 
-# INSTALLATION
+#INSTALLATION
 
 Download Linux-Deploy from PlayStore.
 
@@ -39,7 +39,7 @@ export XDG_RUNTIME_DIR=/tmp/runtime-yourchrootusername
 
 Remember that if you set an user different than android, you are required to change all the recurrences of android in the linux-deploy  script as well
 
-# SECTIONS
+#SECTIONS
 
 files - contains the rootfs and the box86 and 64 binaries. A guide to install them is also provided
 
