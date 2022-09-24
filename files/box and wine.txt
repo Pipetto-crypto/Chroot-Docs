@@ -1,0 +1,48 @@
+Follow this guide to install box86 and box64 in your chroot, this specific guide will assume you are logged in the chroot with the linux-deploy start command:
+
+Get box86 and box64 you find here and copy them in /usr/bin: sudo cp /media/internal_storage/path_to_the_repo/files/box86 /usr/bin && sudo cp /media/internal_storage/path_to_the_repo/files/box64 /usr/bin
+
+Add armhf foreign architecture: sudo dpkg --add-architecture armhf
+
+Afer running sudo apt update, download box86 and box64 dependencies:
+
+sudo apt install zenity:armhf libasound*:armhf libstdc++6:armhf mesa*:armhf #box86 dependencies
+
+sudo apt install mesa* zenity* #box64 dependencies
+
+While you are in your home directory, create these two directories:
+
+mkdir wine
+
+mkdir wine64
+
+Download wine binaries: wget http://www.playonlinux.com/wine/binaries/phoenicis/upstream-linux-x86/PlayOnLinux-wine-7.0-rc1-upstream-linux-x86.tar.gz
+
+Download wine64 binaries: wget  http://www.playonlinux.com/wine/binaries/phoenicis/upstream-linux-amd64/PlayOnLinux-wine-6.14-upstream-linux-amd64.tar.gz
+
+Extract both wine and wine64 in those two folders you had created before:
+
+tar -xzvf PlayOnLinux-wine-7.0-rc1-upstream-linux-x86.tar.gz -C wine
+
+tar -xzvf PlayOnLinux-wine-6.14-upstream-linux-amd64.tar.gz -C wine64
+
+Add these lines to your /etc/profile:
+
+export BOX86_PATH=~/wine/bin/
+
+export BOX86_LD_LIBRARY_PATH=~/wine/lib/wine/i386-unix/:/lib/i386-linux-gnu:/lib/aarch64-linux-gnu/
+
+export BOX64_PATH=~/wine64/bin/
+
+export BOX64_LD_LIBRARY_PATH=~/wine64/lib/i386-unix/:~/wine64/lib/wine/x86_64-unix/:/lib/i386-linux-gnu/:/lib/x86_64-linux-gnu:/lib/aarch64-linux-gnu
+
+Run wine 32 bit with box86 wine and wine 64 bit with box64 wine64. Remember that you can run either 32bit or 64bit at a time and if you want to switch you will have to delete your prefix.
+
+To run wine32 without always deleting the prefix, put these in your .bashrc
+
+export PATH=~/wine/bin:~/wine64/bin:$PATH
+alias win32='WINEPREFIX=~/.wine32 WINEARCH=win32'
+
+To create a wine32 prefix run win32 wine winecfg in terminal, everytime you want to run a win32 app type win32 box86 wine(this is not needed if you have the app installed and you have binfmt support in kernel)
+
+Some parts of this guide have been taken from here:  https://github.com/fengxue-jrql/box86-and-box64-for-arm64/blob/main/How%20to%20set%20the%20environment

@@ -1,19 +1,48 @@
-Some of the files used in my setup, mainly the script I wrote to warp everything up.
+Collection of scripts, docs that I used to setup my chroot. It's highly suggested that you download this repo and extract it somewhere on your device, all the docs here will assume that you did.
 
-It doesn't install the chroot nor the dependencies required to run, so before you use it install these in termux:
+
+# INSTALLATION
+
+Download Linux-Deploy from PlayStore.
+
+In Linux Deploy, tap the icon with the three sliders and make sure you set the following options like this:
+
+Distribution: rootfs
+
+Installation Type: File
+
+Source path: the path where you have stored the rootfs contained in the files section of this repo(/sdcard/path_to_this_repo/files/debian.tar.bz2)
+
+SSH: Enable
+
+PulseAudio: Enable --> Audio Settings/Port delete whatever is written there and leave it blank
+
+Configure the rest of the other options to your needs and once you are done go back to the main menu, tap on the three dots icon and select Install
+
+Once it finishes installing, open Termux and after giving executable permission to the linux-deploy script in the root of this repo move it to your $PATH: cp path_to_linux-deploy_script $PATH
+
+
+Before you can run the chroot, you are required to install these dependecies:
 
 pkg install root-repo
-pkg install pulseaudio bindfs tsu
+pkg install pulseaudio bindfs tsu openssh
 
-Use this guide to install Termux-X11:
+To run the chroot, you just need to execute the script like this: linux-deploy start , running the script without any option will print a help screen. 
 
-https://udroid-rc.gitbook.io/udroid-wiki/udroid-landing/quick-installation-and-usage/setting-up-gui/termux-x11
+The first time you run the chroot, you are required to append these lines to your /etc/profile:
 
-For more information about the termux-x11 setup, refer to the guide in the termux-x11 folder you find here
+export DISPLAY=:0
 
-It requires to have Linux Deploy installed which you will have to use to make the chroot first(tested only with Debian Bullseye, works with everything but you will need to downgrade Xwayland package if above 1.20.11).
+export PULSE_SERVER=127.0.0.1
 
-If you set a different username than android change it in the script as well.
+export XDG_RUNTIME_DIR=/tmp/runtime-yourchrootusername
 
-Read the text file in the folders to understand how to use the config files there
+Remember that if you set an user different than android, you are required to change all the recurrences of android in the linux-deploy  script as well
 
+# SECTIONS
+
+files - contains the rootfs and the box86 and 64 binaries. A guide to install them is also provided
+
+termux-x11 - contains instructions on how to install termux-x11
+
+sparkle - contains instructions on how to install sparkle xwayland server, sometimes faster than termux-x11 but generally not recommended

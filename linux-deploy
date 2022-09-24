@@ -3,7 +3,10 @@
 CHROOT_DIR=/data/local/mnt
 INTERNAL_STORAGE=/sdcard
 DEPLOY=/data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy
-EXTERNAL_STORAGE=/mnt/media_rw/$(sudo ls /mnt/media_rw)
+if [ -n "$(sudo ls -A /mnt/media_rw)" ];
+then
+	EXTERNAL_STORAGE=/mnt/media_rw/$(sudo ls /mnt/media_rw)
+fi 
 ARG1=$1
 ARG2=$2
 
@@ -58,9 +61,11 @@ then
 		su -c $DEPLOY start -m
 	echo "\n"
 	echo "Binding internal storage"
+		sudo mkdir -p $CHROOT_DIR/media/internal_storage
 		sudo bindfs -o perms=a+rwx -o nonempty $INTERNAL_STORAGE $CHROOT_DIR/media/internal_storage
 	echo "\n"
-	echo "Binding external storage"
+		echo "Binding external storage"
+		sudo mkdir -p $CHROOT_DIR/media/external_sd
 		sudo bindfs -o perms=a+rwx -o nonempty $EXTERNAL_STORAGE $CHROOT_DIR/media/external_sd
 	echo "\n"
 	echo "Loading binfmts entries"

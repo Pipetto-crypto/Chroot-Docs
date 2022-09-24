@@ -4,6 +4,7 @@ Use the -s option (linux-deploy start -s) to start the Xwayland server in the ch
 
 If you are using a different desktop environment than lxqt, modify the script in /usr/bin/sparkle accordingly.
 
+
  
 
 
