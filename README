@@ -16,19 +16,19 @@ SSH: Enable
 
 PulseAudio: Enable --> Audio Settings/Port delete whatever is written there and leave it blank
 
-Configure the rest of the other options to your needs and once you are done go back to the main menu, tap on the three dots icon and select Install
+Configure USER PASSWORD, USER NAME, IMAGE SIZE, LOCALIZATION to your likes. Don't touch MOUNTS and GUI options, the linux-deploy script in this repo handles them itself. Once you are done configuring everything, go back and tap on the three dots icon and press install.
 
 Once it finishes installing, open Termux and after giving executable permission to the linux-deploy script in the root of this repo move it to your $PATH: cp path_to_linux-deploy_script $PATH
 
 
-Before you can run the chroot, you are required to install these dependecies:
+Before you can run the chroot, you are required to install these dependecies in Termux:
 
 pkg install root-repo
 pkg install pulseaudio bindfs tsu openssh
 
 To run the chroot, you just need to execute the script like this: linux-deploy start , running the script without any option will print a help screen. 
 
-The first time you run the chroot, you will have to append these lines to your /etc/profile
+The first time you enter the chroot, you will have to append these lines to your /etc/profile
 
 export DISPLAY=:0
 
@@ -36,7 +36,7 @@ export PULSE_SERVER=127.0.0.1
 
 export XDG_RUNTIME_DIR=/tmp/runtime-yourchrootusername
 
-Remember that if you set an user different than android, you are required to change all the recurrences of android in the linux-deploy  script as well
+Remember that if you set an user different than android, you are required to change all the recurrences of android in the linux-deploy script as well
 
 Sections
 
