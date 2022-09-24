@@ -47,3 +47,11 @@ termux-x11 - contains instructions on how to install termux-x11
 sparkle - contains instructions on how to install sparkle xwayland server, sometimes faster than termux-x11 but generally not recommended
 
 videos - contains brief showcases about how the chroot work. 
+
+Recommendations
+
+1. Install the linux image in your internal storage, I noticed that this gives a sizeable boost in speed
+
+2. Use a lightweight Desktop Environment like lxqt: sudo apt install lxqt
+
+3. Run wine with winedesktop ( win32 taskset -c 4-7 box86 wine explorer /desktop=shell,1920x1080 explorer.exe . for wine32) 
