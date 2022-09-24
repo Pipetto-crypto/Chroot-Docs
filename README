@@ -1,9 +1,8 @@
 Collection of scripts, docs that I used to setup my chroot. It's highly suggested that you download this repo and extract it somewhere on your device, all the docs here will assume that you did.
 
+# Installation
 
-# INSTALLATION
-
-Download Linux-Deploy from PlayStore.
+Download Linux-Deploy from PlayStore and the rootfs from here:  https://mega.nz/file/cV5ClJrb#h5UvcIdiLq2zFncGYBe3lBL3QjauJFmLupu2faKvFUY
 
 In Linux Deploy, tap the icon with the three sliders and make sure you set the following options like this:
 
@@ -11,7 +10,7 @@ Distribution: rootfs
 
 Installation Type: File
 
-Source path: the path where you have stored the rootfs contained in the files section of this repo(/sdcard/path_to_this_repo/files/debian.tar.bz2)
+Source path: the path where you have stored the rootfs (/sdcard/path_to_rootfs/debian.tar.bz2)
 
 SSH: Enable
 
@@ -29,7 +28,7 @@ pkg install pulseaudio bindfs tsu openssh
 
 To run the chroot, you just need to execute the script like this: linux-deploy start , running the script without any option will print a help screen. 
 
-The first time you run the chroot, you are required to append these lines to your /etc/profile:
+The first time you run the chroot, you will have to append these lines to your /etc/profile
 
 export DISPLAY=:0
 
@@ -39,7 +38,7 @@ export XDG_RUNTIME_DIR=/tmp/runtime-yourchrootusername
 
 Remember that if you set an user different than android, you are required to change all the recurrences of android in the linux-deploy  script as well
 
-#SECTIONS
+# Sections
 
 files - contains the rootfs and the box86 and 64 binaries. A guide to install them is also provided
 
