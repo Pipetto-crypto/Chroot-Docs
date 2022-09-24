@@ -4,7 +4,7 @@ Installation
 
 Download Linux-Deploy from PlayStore and the rootfs from here:  https://mega.nz/file/cV5ClJrb#h5UvcIdiLq2zFncGYBe3lBL3QjauJFmLupu2faKvFUY
 
-In Linux Deploy, tap the icon with the three sliders and make sure you set the following options like this:
+In Linux Deploy, tap the icon with the three sliders(the one next to the stop button) and make sure you set the following options like this:
 
 Distribution: rootfs
 
