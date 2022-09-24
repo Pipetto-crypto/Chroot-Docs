@@ -40,7 +40,7 @@ Remember that if you set an user different than android, you are required to cha
 
 Sections
 
-box/wine - contains the box86 and 64 binaries and a guide on how to install them
+box-wine - contains the box86 and 64 binaries and a guide on how to install them
 
 termux-x11 - contains instructions on how to install termux-x11
 
