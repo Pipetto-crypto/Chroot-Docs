@@ -45,3 +45,5 @@ box-wine - contains the box86 and 64 binaries and a guide on how to install them
 termux-x11 - contains instructions on how to install termux-x11
 
 sparkle - contains instructions on how to install sparkle xwayland server, sometimes faster than termux-x11 but generally not recommended
+
+videos - contains brief showcases about how the chroot work. 
