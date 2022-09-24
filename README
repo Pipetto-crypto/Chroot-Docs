@@ -1,6 +1,6 @@
 Collection of scripts, docs that I used to setup my chroot. It's highly suggested that you download this repo and extract it somewhere on your device, all the docs here will assume that you did.
 
-# Installation
+Installation
 
 Download Linux-Deploy from PlayStore and the rootfs from here:  https://mega.nz/file/cV5ClJrb#h5UvcIdiLq2zFncGYBe3lBL3QjauJFmLupu2faKvFUY
 
@@ -38,9 +38,9 @@ export XDG_RUNTIME_DIR=/tmp/runtime-yourchrootusername
 
 Remember that if you set an user different than android, you are required to change all the recurrences of android in the linux-deploy  script as well
 
-# Sections
+Sections
 
-files - contains the rootfs and the box86 and 64 binaries. A guide to install them is also provided
+box/wine - contains the box86 and 64 binaries and a guide on how to install them
 
 termux-x11 - contains instructions on how to install termux-x11
 
