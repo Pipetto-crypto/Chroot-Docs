@@ -1,4 +1,17 @@
-Collection of scripts, docs that I used to setup my chroot. It's highly suggested that you download this repo and extract it somewhere on your device, all the docs here will assume that you did. These docs will assume that you are using a chroot as well for most part but majority of the instructions here will also work for a proot.
+Collection of scripts, docs that I used to setup my chroot. These docs will assume the following:
+
+1. You have this repo somewhere downloaded and extracted in your device.
+
+2. You are using Debian though Ubuntu may work as well for most part.
+
+3. You are using a chroot and you are launching it with the linux-deploy script though most of the instructions here will work with any setup. 
+
+Generally you can just look at the linux-deploy script, see what each sections does and copy the commands in termux yourself. Example for pulseaudio, copy these in termux:
+
+pulseaudio --start --exit-idle-time=-1
+pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
+
+Also, in some cases I have left some specific proot installation instructions in a few of the docs here
 
 # Installation
 
@@ -36,7 +49,7 @@ export PULSE_SERVER=127.0.0.1
 
 export XDG_RUNTIME_DIR=/tmp/runtime-yourchrootusername
 
-Remember that if you set an user different than android, you are required to change all the recurrences of android in the linux-deploy script as well
+Remember that if you set an user different than android, you are required to change all the recurrences of android in the linux-deploy script as well.
 
 # Sections
 
@@ -56,8 +69,6 @@ videos - contains brief showcases about how the chroot work.
 
 3. Run wine with winedesktop ( win32 taskset -c 4-7 box86 wine explorer /desktop=shell,1920x1080 explorer.exe . for wine32) 
 
-4. Debian "works" better for this compared to Ubuntu, so it would be better if you used that
+4. If you can, try to use Termux-x11 since it will offer you the smoothest experience
 
-5. If you can, try to use Termux-x11 since it will offer you the smoothest experience
-
-6. If you can't get a chroot for various reasons, you can fall back to using a proot. I recommend proot-distro package in termux.
+5. If you can't get a chroot for various reasons, you can fall back to using a proot. I recommend proot-distro package in termux.
