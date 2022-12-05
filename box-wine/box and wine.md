@@ -67,4 +67,5 @@ Type the command 'source /etc/profile' to make the changes effective in the curr
 Some parts of this guide have been taken from here:  
 
 https://github.com/fengxue-jrql/box86-and-box64-for-arm64/blob/main/How%20to%20set%20the%20environment
+
 https://box86.org/2022/09/running-bash-with-box86-box64/
