@@ -1,4 +1,4 @@
-# BOX86 AND BOX64
+Follow this guide to install box86 and box64 in your chroot, this specific guide will assume you are logged in the chroot with the linux-deploy start command:
 
 Get box86 and box64 you find here and copy them in /usr/bin: sudo cp /media/internal_storage/path_to_the_repo/files/box86 /usr/bin && sudo cp /media/internal_storage/path_to_the_repo/files/box64 /usr/bin
 
