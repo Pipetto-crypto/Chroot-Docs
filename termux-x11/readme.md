@@ -1,3 +1,7 @@
+# INSTALLATION
+
+## CHROOT
+
 Use this guide to install Termux-X11 but pay attention to some of the steps highlighted here:
 
 https://udroid-rc.gitbook.io/udroid-wiki/udroid-landing/quick-installation-and-usage/setting-up-gui/termux-x11
@@ -12,6 +16,19 @@ sudo chmod 755 /tmp/runtime-android
 
 If android isn't your username, change it accordingly.
 
-To start the Xwayland server now, launch the chroot with the -w option ( linux deploy start -w)
+To start the Xwayland server now, launch the chroot with the -w option ( linux deploy start -w). At one point, it will launch the termux-x11 app where you need to wait up until the toast "Service was created" appears then you can leave.
 
 The first time you use the -w option, it will install the script you can find here in /usr/bin. You are free to modify it according to your needs
+
+## PROOT
+
+Follow all the steps above up to the point where it tells you to start the xwayland server. Launch your proot with the --shared-tmp option( proot-distro login debian --shared-tmp) then from another terminal window run the command:
+
+termux-x11
+
+Once the termux-x11 opens and the toast "Service was created appears" go back into termux and inside the proot type the command "Xwayland :0 -noreset &". Now the tricky part is that this may hang and you will be required to close termux-x11 from the notification, exit the proot and retry. To see if it worked after the Xwayland command you will see a similiar output:
+
+"The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 569, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server"
