@@ -1,4 +1,4 @@
-Collection of scripts, docs that I used to setup my chroot. It's highly suggested that you download this repo and extract it somewhere on your device, all the docs here will assume that you did. These docs will assume that you are using a chroot as well for most part but most of the instructions here works for a proot as well.
+Collection of scripts, docs that I used to setup my chroot. It's highly suggested that you download this repo and extract it somewhere on your device, all the docs here will assume that you did. These docs will assume that you are using a chroot as well for most part but most of the instructions here will also work for a proot.
 
 # Installation
 
