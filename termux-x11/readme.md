@@ -26,7 +26,7 @@ Follow all the steps above up to the point where it tells you to start the xwayl
 
 termux-x11
 
-Once the termux-x11 opens and the toast "Service was created appears" go back into termux and inside the proot type the command "Xwayland :0 -noreset &". Now the tricky part is that this may hang and you will be required to close termux-x11 from the notification, exit the proot and retry. To see if it worked after the Xwayland command you will see a similiar output:
+Once the termux-x11 opens and the toast "Service was created" appears go back into termux and inside the proot type the command "Xwayland :0 -noreset &". Now the tricky part is that this may hang and you will be required to close termux-x11 from the notification, exit the proot and retry. To see if it worked after the Xwayland command you will see a similiar output:
 
 "The XKEYBOARD keymap compiler (xkbcomp) reports:
 > Warning:          Unsupported maximum keycode 569, clipping.
