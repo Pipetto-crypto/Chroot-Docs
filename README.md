@@ -56,7 +56,7 @@ videos - contains brief showcases about how the chroot work.
 
 3. Run wine with winedesktop ( win32 taskset -c 4-7 box86 wine explorer /desktop=shell,1920x1080 explorer.exe . for wine32) 
 
-4.Debian "works" better for this compared to Ubuntu
+4. Debian "works" better for this compared to Ubuntu
 
 5. If you can, try to use Termux-x11 since it will offer you the smoothest experience
 
