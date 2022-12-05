@@ -2,7 +2,9 @@
 
 
 
-Get box86 and box64 you find here, log into your chroot/proot and copy the two executables you downloaded in /usr/bin: sudo cp path_to_box86/box86 /usr/bin && sudo cp path_to_box64/box64 /usr/bin
+Get the box86 and box64 executables you find here, log into your chroot/proot and copy the two executables you downloaded in /usr/bin: 
+
+sudo cp path_to_box86/box86 /usr/bin && sudo cp path_to_box64/box64 /usr/bin
 
 Add armhf foreign architecture: sudo dpkg --add-architecture armhf
 
@@ -36,17 +38,17 @@ export BOX86_LD_LIBRARY_PATH=~/wine/lib/wine/i386-unix/:/lib/i386-linux-gnu:/lib
 
 export BOX64_PATH=~/wine64/bin/
 
-export BOX64_LD_LIBRARY_PATH=~ /wine64/lib/i386-unix/: ~/wine64/lib/wine/x86_64-unix/:/lib/i386-linux-gnu/:/lib/x86_64-linux-gnu:/lib/aarch64-linux-gnu/
+export BOX64_LD_LIBRARY_PATH=~ /wine64/lib/i386-unix/: ~/wine64/lib/wine/x86_64-unix/:/lib/i386-linux-gnu/:/lib/x86_64-linux-gnu:/lib/aarch64-linux-gnu/ (spaces between ~ and / will need to be removed like the spaces between : and ~)
 
-To make effective the changes, type the command 'source /etc/profile'. You can run wine 32 bit with box86 wine and wine 64 bit with box64 wine64. Remember that you can run either 32bit or 64bit at a time and if you want to switch you will have to delete your prefix.
+To make the changes effective, type the command 'source /etc/profile'. You can run 32bit programs with 'box86 wine name.exe' and 64bit ones with 'box64 wine64 name.exe' command. Remember that you can run either 32bit or 64bit at a time and if you want to switch you will have to delete your prefix.
 
-To run wine32 without always deleting the prefix, append these lines to your .bashrc:
+To run wine32 without always deleting the prefix, append these lines to your .bashrc(spaces between ~ and / will need to be removed):
 
 export PATH=~ /wine/bin/: ~/wine64/bin/:$PATH
 
 alias win32='WINEPREFIX=~/.wine32 WINEARCH=win32'
 
-Type the command 'source .bashrc' to make the change effectives then to create a wine32 prefix run 'win32 wine winecfg' command in terminal, everytime you want to run a win32 app type 'win32 box86 wine programyouwanttoexec.exe'.
+Type the command 'source .bashrc' to make the change effectives then to create a wine32 prefix run 'win32 wine winecfg' command in terminal, everytime you want to run a win32 app type 'win32 box86 wine programname.exe'.
 
 
 # x86 and x64 BASH
