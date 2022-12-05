@@ -14,11 +14,15 @@ sudo mkdir -p /tmp/runtime-android
 sudo chown android:android /tmp/runtime-android
 sudo chmod 755 /tmp/runtime-android
 
-If android isn't your username, change it accordingly.
+If android isn't your username, change it accordingly. Exit the chroot and if you have used the script here to run it you need to stop it as well (linux-deploy stop).
 
 To start the Xwayland server now, launch the chroot with the -w option ( linux deploy start -w). At one point, it will launch the termux-x11 app where you need to wait up until the toast "Service was created" appears then you can leave.
 
-The first time you use the -w option, it will install the script you can find here in /usr/bin. You are free to modify it according to your needs
+Inside the chroot paste this command to start the Xwayland server:
+
+taskset -c 4-7 Xwayland :0 &
+
+
 
 ## PROOT
 
