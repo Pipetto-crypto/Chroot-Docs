@@ -61,6 +61,14 @@ export BOX64_BASH=pathtobashx64/bash_x64
 
 Type the command 'source /etc/profile' to make the changes effective in the current session. Now it should be possible to run stuffs like winetricks without binfmt_misc.
 
+# WINETRICKS
+
+Move the executable you find here into /use/bin and give it executable permission:
+
+sudo mv pathtowinetricks/winetricks /usr/bin
+sudo chmod +x /usr/bin/winetricks
+
+When you want to execute winetricks, run the following command 'win32 box64 winetricks'
 
 # CREDITS
 
