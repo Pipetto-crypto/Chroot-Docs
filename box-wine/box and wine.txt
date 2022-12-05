@@ -1,6 +1,8 @@
-Follow this guide to install box86 and box64 in your chroot, this specific guide will assume you are logged in the chroot with the linux-deploy start command:
+# INSTALLATION
 
-Get box86 and box64 you find here and copy them in /usr/bin: sudo cp /media/internal_storage/path_to_the_repo/files/box86 /usr/bin && sudo cp /media/internal_storage/path_to_the_repo/files/box64 /usr/bin
+
+
+Get box86 and box64 you find here, log into your chroot/proot and copy the two executables you downloaded in /usr/bin: sudo cp path_to_box86/box86 /usr/bin && sudo cp path_to_box64/box64 /usr/bin
 
 Add armhf foreign architecture: sudo dpkg --add-architecture armhf
 
@@ -36,22 +38,33 @@ export BOX64_PATH=~/wine64/bin/
 
 export BOX64_LD_LIBRARY_PATH=~/wine64/lib/i386-unix/:~/wine64/lib/wine/x86_64-unix/:/lib/i386-linux-gnu/:/lib/x86_64-linux-gnu:/lib/aarch64-linux-gnu
 
-Run wine 32 bit with box86 wine and wine 64 bit with box64 wine64. Remember that you can run either 32bit or 64bit at a time and if you want to switch you will have to delete your prefix.
+To make effective the changes, type the command 'source /etc/profile'. You can run wine 32 bit with box86 wine and wine 64 bit with box64 wine64. Remember that you can run either 32bit or 64bit at a time and if you want to switch you will have to delete your prefix.
 
-To run wine32 without always deleting the prefix, put these in your .bashrc
+To run wine32 without always deleting the prefix, append these lines to your .bashrc:
 
 export PATH=~/wine/bin:~/wine64/bin:$PATH
 alias win32='WINEPREFIX=~/.wine32 WINEARCH=win32'
 
-To create a wine32 prefix run win32 wine winecfg in terminal, everytime you want to run a win32 app type win32 box86 wine.
+Type the command 'source .bashrc' to make the change effectives then to create a wine32 prefix run 'win32 wine winecfg' command in terminal, everytime you want to run a win32 app type 'win32 box86 wine programyouwanttoexec.exe'.
+
+
+# x86 and x64 BASH
+
 
 Since it is hard to get binfmt support in Android, after a recent box86/64 update it is possible to use an alternative for it:
 
-Download bash_x86 and bash_x64 from here and put them in a folder in your home directory then in your /etc/profile add the following lines:
+Make sure you have downloaded the latest executable of box86 and box64 you can find here then download bash_x86 and bash_x64 from here and put them in a folder in your home directory then in your /etc/profile add the following lines:
 
 export BOX86_BASH=pathtobashx86/bash_x86
 export BOX64_BASH=pathtobashx64/bash_x64
 
-Type the command source /etc/profile to make the changes effective 
+Type the command 'source /etc/profile' to make the changes effective in the current session. Now it should be possible to run stuffs like winetricks without binfmt_misc.
 
-Some parts of this guide have been taken from here:  https://github.com/fengxue-jrql/box86-and-box64-for-arm64/blob/main/How%20to%20set%20the%20environment
+
+# CREDITS
+
+
+Some parts of this guide have been taken from here:  
+
+https://github.com/fengxue-jrql/box86-and-box64-for-arm64/blob/main/How%20to%20set%20the%20environment
+https://box86.org/2022/09/running-bash-with-box86-box64/
