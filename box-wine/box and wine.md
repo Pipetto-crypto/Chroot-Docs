@@ -42,7 +42,7 @@ To make effective the changes, type the command 'source /etc/profile'. You can r
 
 To run wine32 without always deleting the prefix, append these lines to your .bashrc:
 
-export PATH=~/wine/bin/:~/wine64/bin/:$PATH
+export PATH=~ /wine/bin/: ~/wine64/bin/:$PATH
 
 alias win32='WINEPREFIX=~/.wine32 WINEARCH=win32'
 
