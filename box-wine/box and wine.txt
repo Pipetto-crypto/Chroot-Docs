@@ -43,6 +43,15 @@ To run wine32 without always deleting the prefix, put these in your .bashrc
 export PATH=~/wine/bin:~/wine64/bin:$PATH
 alias win32='WINEPREFIX=~/.wine32 WINEARCH=win32'
 
-To create a wine32 prefix run win32 wine winecfg in terminal, everytime you want to run a win32 app type win32 box86 wine(this is not needed if you have the app installed and you have binfmt support in kernel)
+To create a wine32 prefix run win32 wine winecfg in terminal, everytime you want to run a win32 app type win32 box86 wine.
+
+Since it is hard to get binfmt support in Android, after a recent box86/64 update it is possible to use an alternative for it:
+
+Download bash_x86 and bash_x64 from here and put them in a folder in your home directory then in your /etc/profile add the following lines:
+
+export BOX86_BASH=pathtobashx86/bash_x86
+export BOX64_BASH=pathtobashx64/bash_x64
+
+Type the command source /etc/profile to make the changes effective 
 
 Some parts of this guide have been taken from here:  https://github.com/fengxue-jrql/box86-and-box64-for-arm64/blob/main/How%20to%20set%20the%20environment
