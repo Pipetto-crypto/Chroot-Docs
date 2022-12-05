@@ -72,4 +72,4 @@ videos - contains brief showcases about how the chroot work.
 
 4. If you can, try to use Termux-x11 since it will offer you the smoothest experience
 
-5. If you can't get a chroot for various reasons, you can fall back to using a proot. I recommend proot-distro package in termux.
+5. If you can't get a chroot for various reasons, you can fall back to using a proot. I recommend proot-distro package in termux. It's very easy to use so no instructions will be provided here
