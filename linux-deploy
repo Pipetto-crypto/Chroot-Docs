@@ -10,15 +10,10 @@ fi
 ARG1=$1
 ARG2=$2
 
+#This function contains the commands to start the Xwayland socket in the chroot, if you don't want to use this script just copy paste them in order in termux.
+
 xwayland(){
 
-if [ ! -f "$CHROOT_DIR/bin/termux-x11" ];
-then
- 	echo "Installing the termux-x11 script"
-	curl https://raw.githubusercontent.com/Pipetto-crypto/Chroot-Docs/main/termux-x11/termux-x11 > termux-x11
-	sudo mv termux-x11 $CHROOT_DIR/bin
-	sudo chmod a+x $CHROOT_DIR/bin/termux-x11	
-fi
 echo "Creating the socket"
 sudo ln -sf $CHROOT_DIR/tmp/runtime-android $PREFIX/xwayland
 sudo chmod 777 $PREFIX/xwayland
@@ -30,6 +25,7 @@ sudo chmod 755 $CHROOT_DIR/tmp/runtime-android
 sudo chmod 777 $PREFIX/xwayland/wayland-0
 
 }
+
 
 sparkle(){
 
@@ -61,7 +57,8 @@ then
 		su -c $DEPLOY start -m
 	echo "\n"
 	echo "Binding internal storage"
-		sudo mkdir -p $CHROOT_DIR/media/internal_storage
+        #This is not required if you are using proot-distro
+                sudo mkdir -p $CHROOT_DIR/media/internal_storage
 		sudo bindfs -o perms=a+rwx -o nonempty $INTERNAL_STORAGE $CHROOT_DIR/media/internal_storage
 	echo "\n"
 		echo "Binding external storage"
@@ -74,8 +71,7 @@ then
 	if [ "$ARG2" = "-w" ];
 	then
 		xwayland
-		echo "Starting the Xwayland server in the chroot through the script"
-		su -c $DEPLOY shell -u android termux-x11
+
 	elif [ "$ARG2" = "-s" ];
 	then
 		sparkle
