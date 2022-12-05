@@ -42,7 +42,7 @@ export BOX64_LD_LIBRARY_PATH=~ /wine64/lib/i386-unix/: ~/wine64/lib/wine/x86_64-
 
 To make the changes effective, type the command 'source /etc/profile'. You can run 32bit programs with 'box86 wine name.exe' and 64bit ones with 'box64 wine64 name.exe' command. Remember that you can run either 32bit or 64bit at a time and if you want to switch you will have to delete your prefix.
 
-To run wine32 without always deleting the prefix, append these lines to your .bashrc(spaces between ~ and / will need to be removed):
+To run wine32 without always deleting the prefix, append these lines to your .bashrc(spaces between ~ and / will need to be removed like spaces between : and ~):
 
 export PATH=~ /wine/bin/: ~/wine64/bin/:$PATH
 
