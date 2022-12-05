@@ -9,6 +9,7 @@ Collection of scripts, docs that I used to setup my chroot. These docs will assu
 Generally you can just look at the linux-deploy script, see what each sections does and copy the commands in termux yourself. Example for pulseaudio, copy these in termux:
 
 pulseaudio --start --exit-idle-time=-1
+
 pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
 
 Also, in some cases I have left some specific proot installation instructions in a few of the docs here
