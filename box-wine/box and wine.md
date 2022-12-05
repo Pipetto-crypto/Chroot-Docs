@@ -36,13 +36,13 @@ export BOX86_LD_LIBRARY_PATH=~/wine/lib/wine/i386-unix/:/lib/i386-linux-gnu:/lib
 
 export BOX64_PATH=~/wine64/bin/
 
-export BOX64_LD_LIBRARY_PATH='~/wine64/lib/i386-unix/:~/wine64/lib/wine/x86_64-unix/:/lib/i386-linux-gnu/:/lib/x86_64-linux-gnu:/lib/aarch64-linux-gnu/'
+export BOX64_LD_LIBRARY_PATH=~/wine64/lib/i386-unix/:~/wine64/lib/wine/x86_64-unix/:/lib/i386-linux-gnu/:/lib/x86_64-linux-gnu:/lib/aarch64-linux-gnu/
 
 To make effective the changes, type the command 'source /etc/profile'. You can run wine 32 bit with box86 wine and wine 64 bit with box64 wine64. Remember that you can run either 32bit or 64bit at a time and if you want to switch you will have to delete your prefix.
 
 To run wine32 without always deleting the prefix, append these lines to your .bashrc:
 
-export PATH='~/wine/bin/:~/wine64/bin/:$PATH'
+export PATH=~/wine/bin/:~/wine64/bin/:$PATH
 
 alias win32='WINEPREFIX=~/.wine32 WINEARCH=win32'
 
@@ -66,6 +66,7 @@ Type the command 'source /etc/profile' to make the changes effective in the curr
 Move the executable you find here into /use/bin and give it executable permission:
 
 sudo mv pathtowinetricks/winetricks /usr/bin
+
 sudo chmod +x /usr/bin/winetricks
 
 When you want to execute winetricks, run the following command 'win32 box64 winetricks'
