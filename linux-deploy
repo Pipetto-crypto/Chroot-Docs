@@ -10,7 +10,7 @@ fi
 ARG1=$1
 ARG2=$2
 
-#This function contains the commands to start the Xwayland socket in the chroot, if you don't want to use this script just copy paste them in order in termux.
+#This function contains the commands required to start the Xwayland socket in the chroot.
 
 xwayland(){
 
@@ -18,7 +18,7 @@ echo "Creating the socket"
 sudo ln -sf $CHROOT_DIR/tmp/runtime-android $PREFIX/xwayland
 sudo chmod 777 $PREFIX/xwayland
 XDG_RUNTIME_DIR=$PREFIX/xwayland taskset -c 4-7 termux-x11 &  
-pid=$!
+pid=$!  #the following three commands are not necessary, they just kill termux-x11 in termux so it is possible to access the server without opening a new terminal window
 sleep 15
 kill $pid
 sudo chmod 755 $CHROOT_DIR/tmp/runtime-android
@@ -65,12 +65,12 @@ then
 		sudo mkdir -p $CHROOT_DIR/media/external_sd
 		sudo bindfs -o perms=a+rwx -o nonempty $EXTERNAL_STORAGE $CHROOT_DIR/media/external_sd
 	echo "\n"
-	echo "Loading binfmts entries"
+	echo "Loading binfmts entries" #this will fail in most cases but it's not a fatal error
 		su -c $DEPLOY shell -u android sudo update-binfmts --enable > /dev/null 2>&1
 	echo "\n"
 	if [ "$ARG2" = "-w" ];
 	then
-		xwayland
+		xwayland #calls the xwayland function after starting the chroot
 
 	elif [ "$ARG2" = "-s" ];
 	then
