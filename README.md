@@ -60,6 +60,8 @@ termux-x11 - contains instructions on how to install termux-x11
 
 sparkle - contains instructions on how to install sparkle xwayland server, sometimes faster than termux-x11 but generally not recommended
 
+vnc - contains instructions on how to install vnc server
+
 videos - contains brief showcases about how the chroot work. 
 
 # Recommendations
