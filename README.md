@@ -6,7 +6,7 @@ Collection of scripts, docs that I used to setup my chroot. These docs will assu
 
 3. You are using a chroot and you are launching it with the linux-deploy script though most of the instructions here will work with any setup. 
 
-Generally you can just look at the linux-deploy script, see what each section does and copy the commands in termux yourself. For example to get pulseaudio working, copy these in termux:
+Generally you can just look at the linux-deploy script, see what each section does and copy the commands in termux yourself. For example to get pulseaudio working, paste these in termux before starting the proot/chroot:
 
 pulseaudio --start --exit-idle-time=-1
 
