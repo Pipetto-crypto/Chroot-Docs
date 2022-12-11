@@ -11,12 +11,17 @@ nano .vnc/xstartup
 Paste the following lines now, these will work for lxqt but minimal modifications will need to be done to get other desktop environments to work:
 
 unset SESSION_MANAGER
+
 unset DBUS_SESSION_BUS_ADDRESS
+
 exec dbus-launch --exit-with-session startlxqt 
 
 [ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+
 [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
-xsetroot -solid Greg
+
+xsetroot -solid grey
+
 vnconfig -iconic &
 
 After pasting these close and save nano editor (CTRL+O then CTRL+X).
