@@ -26,7 +26,7 @@ vnconfig -iconic &
 
 After pasting these close and save nano editor (CTRL+O then CTRL+X).
 
-To start the vnc server, type the command 'vncserver :0 &'. It will ask you to enter a password the first time.
+To start the vnc server, type the command 'vncserver :0'. It will ask you to enter a password the first time.
 
 
 # CONNECTION
