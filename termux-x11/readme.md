@@ -11,7 +11,9 @@ termux-x11 package seems to have been removed from the x11-repo so don't need to
 In the chroot and not in termux, install Xwayland with apt ( sudo apt install Xwayland ) and you will also need to create the XDG_RUNTIME_DIR folder by pasting these commands:
 
 sudo mkdir -p /tmp/runtime-android
+
 sudo chown android:android /tmp/runtime-android
+
 sudo chmod 755 /tmp/runtime-android
 
 If android isn't your username, change it accordingly. Exit the chroot and if you have used the script here to run it you need to stop it as well (linux-deploy stop).
