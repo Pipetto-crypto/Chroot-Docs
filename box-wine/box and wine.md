@@ -19,7 +19,7 @@ Afer running sudo apt update, download box86 and box64 dependencies:
 
 sudo apt install zenity:armhf libasound*:armhf libstdc++6:armhf mesa*:armhf #box86 dependencies
 
-sudo apt install mesa* zenity* #box64 dependencies
+sudo apt install mesa* zenity* gcc-multilib-x86-64-linux-gnu #box64 dependencies
 
 While you are in your home directory, create these two directories:
 
@@ -45,7 +45,7 @@ export BOX86_LD_LIBRARY_PATH=~/wine/lib/wine/i386-unix/:/lib/i386-linux-gnu:/lib
 
 export BOX64_PATH=~/wine64/bin/
 
-export BOX64_LD_LIBRARY_PATH=~ /wine64/lib/i386-unix/: ~/wine64/lib/wine/x86_64-unix/:/lib/i386-linux-gnu/:/lib/x86_64-linux-gnu:/lib/aarch64-linux-gnu/ (spaces between ~ and / will need to be removed like the spaces between : and ~)
+export BOX64_LD_LIBRARY_PATH=~ /wine64/lib/i386-unix/: ~/wine64/lib/wine/x86_64-unix/:/lib/i386-linux-gnu/:/lib/x86_64-linux-gnu:/lib/aarch64-linux-gnu:/usr/x86_64-linux-gnu/lib/ (spaces between ~ and / will need to be removed like the spaces between : and ~)
 
 To make the changes effective, type the command 'source /etc/profile'. You can run 32bit programs with 'box86 wine name.exe' and 64bit ones with 'box64 wine64 name.exe' command. Remember that you can run either 32bit or 64bit at a time and if you want to switch you will have to delete your prefix.
 
