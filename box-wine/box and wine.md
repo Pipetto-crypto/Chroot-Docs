@@ -4,7 +4,14 @@
 
 Get the box86 and box64 executables you find here, log into your chroot/proot and copy the two executables you downloaded in /usr/bin: 
 
-sudo cp path_to_box86/box86 /usr/bin && sudo cp path_to_box64/box64 /usr/bin
+sudo chmod a+x path_to_box86/box86
+
+sudo cp path_to_box86/box86 /usr/bin
+
+sudo chmod a+x path_to_box64/box64 
+
+sudo cp path_to_box64/box64 /usr/bin
+
 
 Add armhf foreign architecture: sudo dpkg --add-architecture armhf
 
@@ -56,7 +63,7 @@ Type the command 'source .bashrc' to make the change effectives then to create a
 
 Since it is hard to get binfmt support in Android, after a recent box86/64 update it is possible to use an alternative for it:
 
-Make sure you have downloaded the latest executable of box86 and box64 you can find here then download bash_x86 and bash_x64 from here and put them in a folder in your home directory then in your /etc/profile add the following lines:
+Make sure you have downloaded the latest executable of box86 and box64 you can find here then download bash_x86 and bash_x64 from here and put them in a folder in your home directory, and after giving them executable permission, in your /etc/profile add the following lines:
 
 export BOX86_BASH=pathtobashx86/bash_x86
 export BOX64_BASH=pathtobashx64/bash_x64
