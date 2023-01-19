@@ -4,7 +4,14 @@
 
 Get the box86 and box64 executables you find here, log into your chroot/proot and copy the two executables you downloaded in /usr/bin: 
 
-sudo cp path_to_box86/box86 /usr/bin && sudo cp path_to_box64/box64 /usr/bin
+sudo chmod a+x path_to_box86/box86
+
+sudo cp path_to_box86/box86 /usr/bin
+
+sudo chmod a+x path_to_box64/box64 
+
+sudo cp path_to_box64/box64 /usr/bin
+
 
 Add armhf foreign architecture: sudo dpkg --add-architecture armhf
 
@@ -12,7 +19,7 @@ Afer running sudo apt update, download box86 and box64 dependencies:
 
 sudo apt install zenity:armhf libasound*:armhf libstdc++6:armhf mesa*:armhf #box86 dependencies
 
-sudo apt install mesa* zenity* #box64 dependencies
+sudo apt install mesa* zenity* gcc-multilib-x86-64-linux-gnu #box64 dependencies
 
 While you are in your home directory, create these two directories:
 
@@ -38,7 +45,7 @@ export BOX86_LD_LIBRARY_PATH=~/wine/lib/wine/i386-unix/:/lib/i386-linux-gnu:/lib
 
 export BOX64_PATH=~/wine64/bin/
 
-export BOX64_LD_LIBRARY_PATH=~ /wine64/lib/i386-unix/: ~/wine64/lib/wine/x86_64-unix/:/lib/i386-linux-gnu/:/lib/x86_64-linux-gnu:/lib/aarch64-linux-gnu/ (spaces between ~ and / will need to be removed like the spaces between : and ~)
+export BOX64_LD_LIBRARY_PATH=~ /wine64/lib/i386-unix/: ~/wine64/lib/wine/x86_64-unix/:/lib/i386-linux-gnu/:/lib/x86_64-linux-gnu:/lib/aarch64-linux-gnu:/usr/x86_64-linux-gnu/lib/ (spaces between ~ and / will need to be removed like the spaces between : and ~)
 
 To make the changes effective, type the command 'source /etc/profile'. You can run 32bit programs with 'box86 wine name.exe' and 64bit ones with 'box64 wine64 name.exe' command. Remember that you can run either 32bit or 64bit at a time and if you want to switch you will have to delete your prefix.
 
@@ -56,7 +63,7 @@ Type the command 'source .bashrc' to make the change effectives then to create a
 
 Since it is hard to get binfmt support in Android, after a recent box86/64 update it is possible to use an alternative for it:
 
-Make sure you have downloaded the latest executable of box86 and box64 you can find here then download bash_x86 and bash_x64 from here and put them in a folder in your home directory then in your /etc/profile add the following lines:
+Make sure you have downloaded the latest executable of box86 and box64 you can find here then download bash_x86 and bash_x64 from here and put them in a folder in your home directory, and after giving them executable permission, in your /etc/profile add the following lines:
 
 export BOX86_BASH=pathtobashx86/bash_x86
 export BOX64_BASH=pathtobashx64/bash_x64
