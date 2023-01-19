@@ -1,12 +1,16 @@
 #!/bin/sh
 
-USERNAME=android
+CONFIG=/data/data/ru.meefik.linuxdeploy/files/config/linux.conf
+USERNAME=$(sudo cat $CONFIG | awk -F '"|"' '/USER_NAME/{print $2}')
 CHROOT_DIR=/data/local/mnt
 INTERNAL_STORAGE=/sdcard
 DEPLOY=/data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy
+
 if [ -n "$(sudo ls -A /mnt/media_rw)" ];
 then
 	EXTERNAL_STORAGE=/mnt/media_rw/$(sudo ls /mnt/media_rw)
+else
+	EXTERNAL_STORAGE=""
 fi 
 ARG1=$1
 ARG2=$2
@@ -16,8 +20,13 @@ ARG2=$2
 xwayland(){
 
 echo "Creating the socket"
+
+sudo mkdir -p $CHROOT_DIR/tmp/runtime-$USERNAME
+sudo $DEPLOY shell -u $USERNAME sudo chown $USERNAME:$USERNAME /tmp/runtime-$USERNAME
 sudo ln -sf $CHROOT_DIR/tmp/runtime-$USERNAME $PREFIX/xwayland
 sudo chmod 777 $PREFIX/xwayland
+am start -n com.termux.x11/.MainActivity
+sleep 5
 XDG_RUNTIME_DIR=$PREFIX/xwayland taskset -c 4-7 termux-x11 &  
 pid=$!  #the following three commands are not necessary, they just kill termux-x11 in termux so it is possible to access the server without opening a new terminal window
 sleep 15
@@ -46,8 +55,7 @@ sudo mount --bind /data/data/com.sion.sparkle/files $CHROOT_DIR/sparkle
 }
 
 start(){
-if [ ! -d "$CHROOT_DIR/home" ];
-then
+
 	echo "\n"
 	echo "Initializing audio server before startup"
 		pulseaudio --start --exit-idle-time=-1
@@ -59,16 +67,29 @@ then
 	echo "\n"
 	echo "Binding internal storage"
         #This is not required if you are using proot-distro
-                sudo mkdir -p $CHROOT_DIR/media/internal_storage
+        sudo mkdir -p $CHROOT_DIR/media/internal_storage
 		sudo bindfs -o perms=a+rwx -o nonempty $INTERNAL_STORAGE $CHROOT_DIR/media/internal_storage
 	echo "\n"
-		echo "Binding external storage"
-		sudo mkdir -p $CHROOT_DIR/media/external_sd
-		sudo bindfs -o perms=a+rwx -o nonempty $EXTERNAL_STORAGE $CHROOT_DIR/media/external_sd
+		if [ -n $EXTERNAL_STORAGE ];
+		then
+			echo "Binding external storage"
+			sudo mkdir -p $CHROOT_DIR/media/external_sd
+			sudo bindfs -o perms=a+rwx -o nonempty $EXTERNAL_STORAGE $CHROOT_DIR/media/external_sd
+		else
+			echo "SD card is not present, won't bind external storage"
+		fi
+	
 	echo "\n"
-	echo "Loading binfmts entries" #this will fail in most cases but it's not a fatal error
-		su -c $DEPLOY shell -u $USERNAME sudo update-binfmts --enable > /dev/null 2>&1
+	if [ -d /proc/sys/fs/binfmt_misc ];
+	then
+		echo "Loading binfmts entries"
+		su -c $DEPLOY shell -u $USERNAME "sudo update-binfmts --enable > /dev/null 2>&1"
+	else 
+		echo "Binfmt support not detected, skipping loading of binfmt entries"
+	fi
+	
 	echo "\n"
+	
 	if [ "$ARG2" = "-w" ];
 	then
 		xwayland #calls the xwayland function after starting the chroot
@@ -84,24 +105,24 @@ then
 	echo "\n"
 	ssh $USERNAME@localhost
 
-else
-	echo "Chroot has been already mounted, accessing"
-	ssh $USERNAME@localhost
-fi
-
 
 }
 
 stop(){
 
-if [ -d "$PREFIX/wayland" ];
+pid=$(sudo pidof com.termux.x11)
+if [ "$pid" != "" ];
+then
+	sudo kill $pid
+fi
+su -c $DEPLOY  stop -u
+if [ -d $PREFIX/xwayland ];
 then
 	echo "Deleting stale symlinks and files"
 	sudo rm -rf $PREFIX/xwayland/wayland-0
 	rm $PREFIX/xwayland
 fi
-echo "\n"
-su -c /data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy stop -u
+
 
 }
 
@@ -114,6 +135,7 @@ echo "Options:"
 echo "\n"
 echo "start - Launches the chroot, run -w option to start the Xwayland server with Termux-X11 or -s for Sparkle"
 echo "stop -  Stops the chroot"
+echo "restart - Restart the chroot, you can use same options as the start command"
 echo "help -  Print this help page"
 echo "\n"
 }
@@ -127,18 +149,29 @@ do
 		break
 	elif [ "$ARG1" = "start" ];
         then    
+		if [ -d $CHROOT_DIR/home ];
+		then
+			echo "Chroot already mounted, connecting"
+			ssh $USERNAME@localhost
+		else 
+			start
+		fi
+		break
+	elif [ "$ARG1" = "restart" ];
+	then
+		stop
 		start
 		break
 	elif [ "$ARG1" = "help" ];
 	then
 		help
 		break
-        else 
+    else 
 		echo "\n"
 		echo "No option specified"
 		echo "\n"
 		help
-                break
+        break
 	fi	
 
 done
