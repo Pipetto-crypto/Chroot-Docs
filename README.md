@@ -2,7 +2,7 @@ These Docs have been updated to surpass their original purpose and so, a one cli
 
 The installer script creates a chroot image with box, wine, vnc, a window manager like icewm and termux-x11, already installed and configured. To use the script, you just need to paste in termux this single command:
 
-
+curl -L https://raw.githubusercontent.com/Pipetto-crypto/Chroot-Docs/main/setup.sh && source setup.sh 
 
 While this installer may make these docs completely useless, I still recommend to read through them  as they may still contains information that you may need at one point, especially considering that while the installer has been tested sucessfully multiple times, there is still a chance that something may go wrong.
 
