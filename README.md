@@ -67,8 +67,6 @@ export PULSE_SERVER=127.0.0.1
 
 export XDG_RUNTIME_DIR=/tmp/runtime-yourchrootusername
 
-Remember that if you set an user different than android, you are required to change it in the script as well by modifying the USERNAME variable
-
 # Sections
 
 box-wine - contains a guide on how to install box,wine and winetricks
