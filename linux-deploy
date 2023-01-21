@@ -64,6 +64,7 @@ su -c $DEPLOY start -m
 echo -e "\nCopying all scripts in the home directory"
 
 sudo rm -rf $CHROOT_DIR/home/$USERNAME/scripts
+sudo mkdir -p $CHROOT_DIR/home/$USERNAME/scripts
 wget https://raw.githubusercontent.com/Pipetto-crypto/Chroot-Docs/main/setup/install_box.sh
 wget https://raw.githubusercontent.com/Pipetto-crypto/Chroot-Docs/main/setup/install_vnc.sh
 wget https://raw.githubusercontent.com/Pipetto-crypto/Chroot-Docs/main/setup/setup_env.sh
