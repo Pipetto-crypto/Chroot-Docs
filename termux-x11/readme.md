@@ -8,15 +8,7 @@ https://udroid-rc.gitbook.io/udroid-wiki/udroid-landing/quick-installation-and-u
 
 termux-x11 package seems to have been removed from the x11-repo so don't need to install it with pkg anymore, just installing the deb with dpkg should be enough. Follow the rest of the guide up to the "Setting termux is done" line.
 
-In the chroot and not in termux, install Xwayland with apt ( sudo apt install Xwayland ) and you will also need to create the XDG_RUNTIME_DIR folder by pasting these commands:
-
-sudo mkdir -p /tmp/runtime-android
-
-sudo chown android:android /tmp/runtime-android
-
-sudo chmod 755 /tmp/runtime-android
-
-If android isn't your username, change it accordingly. Exit the chroot and if you have used the script here to run it you need to stop it as well (linux-deploy stop).
+In the chroot and not in termux, install Xwayland with apt ( sudo apt install Xwayland ).
 
 To start the Xwayland server now, launch the chroot with the -w option ( linux deploy start -w). At one point, it will launch the termux-x11 app where you need to wait up until the toast "Service was created" appears then you can leave.
 
