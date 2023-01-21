@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CONFIG=/data/data/ru.meefik.linuxdeploy/files/config/linux.conf
 USERNAME=$(sudo cat $CONFIG | awk -F '"|"' '/USER_NAME/{print $2}')
@@ -6,12 +6,13 @@ CHROOT_DIR=/data/local/mnt
 INTERNAL_STORAGE=/sdcard
 DEPLOY=/data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy
 
-if [ -n "$(sudo ls -A /mnt/media_rw)" ];
+if [ -n "$(sudo ls -A /mnt/media_rw)" ]
 then
 	EXTERNAL_STORAGE=/mnt/media_rw/$(sudo ls /mnt/media_rw)
 else
 	EXTERNAL_STORAGE=""
 fi 
+
 ARG1=$1
 ARG2=$2
 
@@ -40,7 +41,7 @@ sudo chmod 777 $PREFIX/xwayland/wayland-0
 sparkle(){
 
 
-if [ ! -f "$CHROOT_DIR/bin/sparkle" ];
+if [ ! -f "$CHROOT_DIR/bin/sparkle" ]
 then	
 	echo "Installing sparkle script"
 	curl https://raw.githubusercontent.com/Pipetto-crypto/Chroot-Docs/main/sparkle/sparkle.sh > sparkle.sh
@@ -54,55 +55,78 @@ sudo mount --bind /data/data/com.sion.sparkle/files $CHROOT_DIR/sparkle
 
 }
 
+update(){
+
+echo -e "\nMounting the container"
+
+su -c $DEPLOY start -m
+
+echo -e "\nCopying all scripts in the home directory"
+
+sudo rm -rf $CHROOT_DIR/home/$USERNAME/scripts
+wget https://raw.githubusercontent.com/Pipetto-crypto/Chroot-Docs/main/setup/install_box.sh
+wget https://raw.githubusercontent.com/Pipetto-crypto/Chroot-Docs/main/setup/install_vnc.sh
+wget https://raw.githubusercontent.com/Pipetto-crypto/Chroot-Docs/main/setup/setup_env.sh
+sudo mv install_box.sh install_vnc.sh setup_env.sh $CHROOT_DIR/home/$USERNAME/scripts
+sudo chmod -R 777 $CHROOT_DIR/home/$USERNAME/scripts
+
+echo -e "\nUpdate the linux-deploy script"
+
+wget https://raw.githubusercontent.com/Pipetto-crypto/Chroot-Docs/main/linux-deploy
+chmod +x linux-deploy
+mv linux-deploy $PATH
+
+echo -e "\nUnmounting the container"
+
+su -c $DEPLOY stop -u
+
+}
+
 start(){
 
-	echo "\n"
-	echo "Initializing audio server before startup"
+	echo -e "\nInitializing audio server before startup"
 		pulseaudio --start --exit-idle-time=-1
 		pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
-	echo "\n"
-	echo "Starting the chroot"
-	echo "\n"
+
+	echo -e "\nStarting the chroot"
 		su -c $DEPLOY start -m
-	echo "\n"
-	echo "Binding internal storage"
+
+	echo -e "\nBinding internal storage"
         #This is not required if you are using proot-distro
         sudo mkdir -p $CHROOT_DIR/media/internal_storage
 		sudo bindfs -o perms=a+rwx -o nonempty $INTERNAL_STORAGE $CHROOT_DIR/media/internal_storage
-	echo "\n"
-		if [ -n $EXTERNAL_STORAGE ];
+
+		if [ -n $EXTERNAL_STORAGE ]
 		then
-			echo "Binding external storage"
+			echo -e "\nBinding external storage"
 			sudo mkdir -p $CHROOT_DIR/media/external_sd
 			sudo bindfs -o perms=a+rwx -o nonempty $EXTERNAL_STORAGE $CHROOT_DIR/media/external_sd
 		else
-			echo "SD card is not present, won't bind external storage"
+			echo -e "\nSD card is not present, won't mount external storage"
 		fi
 	
-	echo "\n"
-	if [ -d /proc/sys/fs/binfmt_misc ];
+
+	if [ -d /proc/sys/fs/binfmt_misc ]
 	then
-		echo "Loading binfmts entries"
+		echo -e "\nLoading binfmts entries"
 		su -c $DEPLOY shell -u $USERNAME "sudo update-binfmts --enable > /dev/null 2>&1"
 	else 
 		echo "Binfmt support not detected, skipping loading of binfmt entries"
 	fi
 	
-	echo "\n"
 	
-	if [ "$ARG2" = "-w" ];
+	if [ "$ARG2" = "-w" ]
 	then
 		xwayland #calls the xwayland function after starting the chroot
 
-	elif [ "$ARG2" = "-s" ];
+	elif [ "$ARG2" = "-s" ]
 	then
 		sparkle
 		echo "Starting the Xwayland server in the chroot through the script"
 		su -c $DEPLOY shell -u $USERNAME sparkle
 	fi
 	
-	echo "All preparations completed, connecting now"
-	echo "\n"
+	echo -e "\nAll preparations completed, connecting now\n"
 	ssh $USERNAME@localhost
 
 
@@ -116,7 +140,7 @@ then
 	sudo kill $pid
 fi
 su -c $DEPLOY  stop -u
-if [ -d $PREFIX/xwayland ];
+if [ -d $PREFIX/xwayland ]
 then
 	echo "Deleting stale symlinks and files"
 	sudo rm -rf $PREFIX/xwayland/wayland-0
@@ -128,28 +152,26 @@ fi
 
 help(){
 
-echo "\n"
-echo "A basic script to integrate Linux-Deploy with Termux. It launches your linux chroots with audio, internal and external storage and a X server to use with Termux:X11 or Sparkle"
-echo "\n"
-echo "Options:"
-echo "\n"
-echo "start - Launches the chroot, run -w option to start the Xwayland server with Termux-X11 or -s for Sparkle"
+echo -e "\nA basic script to integrate Linux-Deploy with Termux. It launches your linux chroots with audio, internal and external storage and a X server to use with Termux:X11 or Sparkle"
+echo -e "\nOptions:\n"
+echo -e "\nstart - Launches the chroot, run -w option to start the Xwayland server with Termux-X11 or -s for Sparkle"
 echo "stop -  Stops the chroot"
 echo "restart - Restart the chroot, you can use same options as the start command"
-echo "help -  Print this help page"
-echo "\n"
+echo "update - Updates this wrapper and downloads useful installation scripts inside the chroot"
+echo -e "help -  Print this help page\n"
+
 }
 
 while [ True ];
 do
 	
-	if [ "$ARG1" = "stop" ];
+	if [ "$ARG1" = "stop" ]
 	then
 		stop
 		break
-	elif [ "$ARG1" = "start" ];
+	elif [ "$ARG1" = "start" ]
         then    
-		if [ -d $CHROOT_DIR/home ];
+		if [ -d $CHROOT_DIR/home ]
 		then
 			echo "Chroot already mounted, connecting"
 			ssh $USERNAME@localhost
@@ -157,19 +179,21 @@ do
 			start
 		fi
 		break
-	elif [ "$ARG1" = "restart" ];
+	elif [ "$ARG1" = "restart" ]
 	then
 		stop
 		start
 		break
-	elif [ "$ARG1" = "help" ];
+	elif [ "$ARG1" = "update" ]
+	then
+		update
+		break
+	elif [ "$ARG1" = "help" ]
 	then
 		help
 		break
     else 
-		echo "\n"
-		echo "No option specified"
-		echo "\n"
+		echo -e "\nNo option specified\n"
 		help
         break
 	fi	
