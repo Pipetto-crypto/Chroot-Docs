@@ -1,4 +1,4 @@
-# INSTALLATION
+# BOX86 AND BOX64
 
 
 Add armhf foreign architecture: sudo dpkg --add-architecture armhf
@@ -23,12 +23,15 @@ sudo ln /usr/local/bin/box86 /usr/bin/box86
 sudo ln /usr/local/bin/box64 /usr/bin/box64
 
 
+
 Afer running sudo apt update, download box86 and box64 dependencies:
 
 
 sudo apt install zenity:armhf libasound*:armhf libstdc++6:armhf mesa*:armhf #box86 dependencies
 
 sudo apt install mesa* zenity* gcc-multilib-x86-64-linux-gnu #box64 dependencies
+
+# WINE
 
 
 While you are in your home directory, create these two directories:
