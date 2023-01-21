@@ -1,41 +1,43 @@
 # INSTALLATION
 
 
-
-Get the box86 and box64 executables you find here, log into your chroot/proot and copy the two executables you downloaded in /usr/bin: 
-
-sudo chmod a+x path_to_box86/box86
-
-sudo cp path_to_box86/box86 /usr/bin
-
-sudo chmod a+x path_to_box64/box64 
-
-sudo cp path_to_box64/box64 /usr/bin
-
-
 Add armhf foreign architecture: sudo dpkg --add-architecture armhf
 
+
+Run sudo apt update then, copy paste the following commands to install box86 and box64:
+
+
+
+
 Afer running sudo apt update, download box86 and box64 dependencies:
+
 
 sudo apt install zenity:armhf libasound*:armhf libstdc++6:armhf mesa*:armhf #box86 dependencies
 
 sudo apt install mesa* zenity* gcc-multilib-x86-64-linux-gnu #box64 dependencies
 
+
 While you are in your home directory, create these two directories:
+
 
 mkdir wine
 
 mkdir wine64
 
+
 Download wine binaries: wget http://www.playonlinux.com/wine/binaries/phoenicis/upstream-linux-x86/PlayOnLinux-wine-7.0-rc1-upstream-linux-x86.tar.gz
+
 
 Download wine64 binaries: wget  http://www.playonlinux.com/wine/binaries/phoenicis/upstream-linux-amd64/PlayOnLinux-wine-6.14-upstream-linux-amd64.tar.gz
 
+
 Extract both wine and wine64 in those two folders you had created before:
+
 
 tar -xzvf PlayOnLinux-wine-7.0-rc1-upstream-linux-x86.tar.gz -C wine
 
 tar -xzvf PlayOnLinux-wine-6.14-upstream-linux-amd64.tar.gz -C wine64
+
 
 Add these lines to your /etc/profile:
 

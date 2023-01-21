@@ -1,3 +1,17 @@
+These Docs have been updated to surpass their original purpose and so, a one click installer has been made in order to facilitate the entire installation process.
+
+The installer script creates a chroot image with box, wine, vnc, a window manager like icewm and termux-x11, already installed and configured. To use the script, you just need to paste in termux this single command:
+
+
+
+While this installer may make these docs completely useless, I still recommend to read through them  as they may still contains information that you may need at one point, especially considering that while the installer has been tested sucessfully multiple times, there is still a chance that something may go wrong.
+
+
+
+DISCLAIMER: You will need to be rooted to use this script but a proot installer is already in the working.
+
+
+
 Collection of scripts, docs that I used to setup my chroot. These docs will assume the following:
 
 1. You have this repo somewhere downloaded and extracted in your device.
@@ -56,7 +70,7 @@ Remember that if you set an user different than android, you are required to cha
 
 # Sections
 
-box-wine - contains the box86 and 64 binaries and a guide on how to install them
+box-wine - contains a guide on how to install box,wine and winetricks
 
 termux-x11 - contains instructions on how to install termux-x11
 
