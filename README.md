@@ -54,6 +54,7 @@ cp path_to_linux-deploy_script $PATH
 Before you can run the chroot, you are required to install these dependecies in Termux:
 
 pkg install root-repo
+
 pkg install pulseaudio bindfs tsu openssh openssl
 
 To run the chroot, you just need to execute the script like this: linux-deploy start , running the script without any option will print a help screen. 
