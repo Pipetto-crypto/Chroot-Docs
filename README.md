@@ -4,6 +4,9 @@ The installer script creates a chroot image with box, wine, vnc, a window manage
 
 curl -L https://raw.githubusercontent.com/Pipetto-crypto/Chroot-Docs/main/setup.sh -o setup.sh && source setup.sh 
 
+This installer takes advantage of a bunch of scripts that will be placed inside the chroot to complete its process. You can execute these scripts individually at any moment and they will be updated every time you update your linux-deploy wrapper, through the linux-deploy update command.
+
+
 While this installer may make these docs completely useless, I still recommend to read through them  as they may still contains information that you may need at one point, especially considering that while the installer has been tested sucessfully multiple times, there is still a chance that something may go wrong.
 
 
