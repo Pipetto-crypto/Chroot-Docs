@@ -12,7 +12,7 @@ echo -e "Installing all dependencies and setting up storage permissions"
 
 pkg update
 pkg install x11-repo root-repo -y
-pkg install pulseaudio bindfs tsu openssh openssl xwayland megatools -y
+pkg install pulseaudio bindfs tsu openssh openssl xwayland megatools wget -y
 
 if [ ! -d ~/storage ]
 then
