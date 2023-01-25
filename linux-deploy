@@ -1,10 +1,10 @@
 #!/bin/bash
 
-CONFIG=/data/data/ru.meefik.linuxdeploy/files/config/linux.conf
+CONFIG=/data/user/0/ru.meefik.linuxdeploy/files/config/linux.conf
 USERNAME=$(sudo cat $CONFIG | awk -F '"|"' '/USER_NAME/{print $2}')
 CHROOT_DIR=/data/local/mnt
 INTERNAL_STORAGE=/sdcard
-DEPLOY=/data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy
+DEPLOY=/data/user/0/ru.meefik.linuxdeploy/files/bin/linuxdeploy
 
 if [ -n "$(sudo ls -A /mnt/media_rw)" ]
 then
