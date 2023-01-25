@@ -75,7 +75,6 @@ sudo $DEPLOY start -m
 echo -e "\n Copying installation scripts and required files to the chroot"
 
 sudo mkdir -p $CHROOT_DIR/home/$USRNAME/scripts
-sudo cp -r setup/debs $CHROOT_DIR/home/$USRNAME
 sudo cp setup/*.sh $CHROOT_DIR/home/$USRNAME/scripts
 sudo chmod a+rwx $CHROOT_DIR/home/$USRNAME/scripts/*
 
