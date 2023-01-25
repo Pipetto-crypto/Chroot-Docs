@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEPLOY=/data/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy
+DEPLOY=/data/user/0/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy
 CHROOT_DIR=/data/local/mnt
 
 echo -e "Cloning the repo"
@@ -49,7 +49,7 @@ sudo rm -rf linuxdeploy-2.6.0-259.apk
 
 echo -e "\nCopying config"
 
-sudo mv linux.conf /data/data/ru.meefik.linuxdeploy/files/config
+sudo mv linux.conf /data/user/0/ru.meefik.linuxdeploy/files/config
 
 echo -e "\nInstalling Termux-X11"
 
