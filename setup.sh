@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEPLOY=/data/user/0/data/ru.meefik.linuxdeploy/files/bin/linuxdeploy
+DEPLOY=/data/user/0/ru.meefik.linuxdeploy/files/bin/linuxdeploy
 CHROOT_DIR=/data/local/mnt
 
 echo -e "Cloning the repo"
