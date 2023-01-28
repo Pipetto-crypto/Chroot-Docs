@@ -3,22 +3,21 @@
 DEPLOY=/data/user/0/ru.meefik.linuxdeploy/files/bin/linuxdeploy
 CHROOT_DIR=/data/local/mnt
 
-echo -e "Cloning the repo"
-
-git clone https://github.com/Pipetto-crypto/Chroot-Docs.git
-cd Chroot-Docs
-
 echo -e "Installing all dependencies and setting up storage permissions"
 
 pkg update
 pkg install x11-repo root-repo -y
-pkg install pulseaudio bindfs tsu openssh openssl xwayland megatools wget -y
+pkg install pulseaudio bindfs tsu openssh openssl xwayland megatools git wget -y
 
 if [ ! -d ~/storage ]
 then
 	termux-setup-storage
 fi
 
+echo -e "Cloning the repo"
+
+git clone https://github.com/Pipetto-crypto/Chroot-Docs.git
+cd Chroot-Docs
 
 echo -e "\nDownloading the rootfs"
 
