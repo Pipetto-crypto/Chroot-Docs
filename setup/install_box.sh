@@ -8,7 +8,7 @@ sudo apt update
 echo -e "Installing required dependencies dependencies"
 
 sudo apt install zenity:armhf libasound*:armhf libstdc++6:armhf mesa*:armhf -y
-sudo apt install mesa* zenity* gcc-multilib-x86-64-linux-gnu -y
+sudo apt install mesa* zenity* gcc-multilib-x86-64-linux-gnu gnupg2 -y
 
 echo -e "Installing box86 and box64"
 
