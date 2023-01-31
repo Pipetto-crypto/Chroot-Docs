@@ -26,8 +26,6 @@ sudo mkdir -p $CHROOT_DIR/tmp/runtime-$USERNAME
 sudo $DEPLOY shell -u $USERNAME sudo chown $USERNAME:$USERNAME /tmp/runtime-$USERNAME
 sudo ln -sf $CHROOT_DIR/tmp/runtime-$USERNAME $PREFIX/xwayland
 sudo chmod 777 $PREFIX/xwayland
-am start -n com.termux.x11/.MainActivity
-sleep 5
 XDG_RUNTIME_DIR=$PREFIX/xwayland taskset -c 4-7 termux-x11 &  
 pid=$!  #the following three commands are not necessary, they just kill termux-x11 in termux so it is possible to access the server without opening a new terminal window
 sleep 15
