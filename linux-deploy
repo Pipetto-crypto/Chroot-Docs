@@ -97,7 +97,7 @@ start(){
         sudo mkdir -p $CHROOT_DIR/media/internal_storage
 		sudo bindfs -o perms=a+rwx -o nonempty $INTERNAL_STORAGE $CHROOT_DIR/media/internal_storage
 
-		if [ -n $EXTERNAL_STORAGE ]
+		if [ "$EXTERNAL_STORAGE" != "" ]
 		then
 			echo -e "\nBinding external storage"
 			sudo mkdir -p $CHROOT_DIR/media/external_sd
