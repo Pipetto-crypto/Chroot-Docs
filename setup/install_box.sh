@@ -13,7 +13,7 @@ sudo apt install mesa-* zenity-* wget gcc-multilib-x86-64-linux-gnu gnupg2 -y
 echo -e "Installing box86 and box64"
 
 sudo wget https://ryanfortner.github.io/box64-debs/box64.list -O /etc/apt/sources.list.d/box64.list
-wget -O- https://ryanfortner.github.io/box64-debs/KEY.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/box64-debs-archive-keyring.gpg 
+wget -qO- https://ryanfortner.github.io/box64-debs/KEY.gpg | sudo apt-key add -
 sudo apt update && sudo apt install box64 -y
 sudo wget https://itai-nelken.github.io/weekly-box86-debs/debian/box86.list -O /etc/apt/sources.list.d/box86.list
 wget -qO- https://itai-nelken.github.io/weekly-box86-debs/debian/KEY.gpg | sudo apt-key add -
