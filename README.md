@@ -1,4 +1,4 @@
-WARNING: This scripts here and this guide has been tested to work on Android 7-10. On newer Android versions it is unlikely to work because of scoped storage restrictions. A new version independent from LinuxDeploy app will be published in the nearby future
+WARNING: These scripts here and this guide has been tested to work on Android 7-10. On newer Android versions it is unlikely to work because of scoped storage restrictions. A new version independent from LinuxDeploy app will be published in the nearby future
 
 
 
