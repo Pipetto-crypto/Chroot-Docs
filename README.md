@@ -1,3 +1,7 @@
+WARNING: This script has been tested to work on Android 7-10. On newer Android versions it is unlikely to work because of scoped storage restrictions. A new version independent from LinuxDeploy app will be published in the nearby future
+
+
+
 These Docs have been updated to surpass their original purpose and so, a one click installer has been made in order to facilitate the entire installation process.
 
 The installer script creates a chroot image with box, wine, vnc, a window manager like icewm and termux-x11, already installed and configured. To use the script, you just need to paste in termux this single command:
