@@ -23,15 +23,12 @@ xwayland(){
 echo "Creating the socket"
 
 sudo mkdir -p $CHROOT_DIR/tmp/runtime-$USERNAME
-sudo $DEPLOY shell -u $USERNAME sudo chown $USERNAME:$USERNAME /tmp/runtime-$USERNAME
-sudo ln -sf $CHROOT_DIR/tmp/runtime-$USERNAME $PREFIX/xwayland
-sudo chmod 777 $PREFIX/xwayland
-XDG_RUNTIME_DIR=$PREFIX/xwayland taskset -c 4-7 termux-x11 &  
-pid=$!  #the following three commands are not necessary, they just kill termux-x11 in termux so it is possible to access the server without opening a new terminal window
-sleep 15
-kill $pid
-sudo chmod 755 $CHROOT_DIR/tmp/runtime-$USERNAME
-sudo chmod 777 $PREFIX/xwayland/wayland-0
+su -c $DEPLOY shell -u root  "chown $USERNAME:$USERNAME /tmp/runtime-$USERNAME"
+taskset -c 4-7 termux-x11 &
+sleep 20
+sudo touch $CHROOT_DIR/tmp/runtime-$USERNAME/wayland-0
+sudo busybox mount --bind $TMPDIR/wayland-0 $CHROOT_DIR/tmp/runtime-$USERNAME/wayland-0
+sudo chmod a+rwx $CHROOT_DIR/tmp/runtime-$USERNAME/wayland-0
 
 }
 
@@ -139,12 +136,6 @@ then
 	sudo kill $pid
 fi
 su -c $DEPLOY  stop -u
-if [ -d $PREFIX/xwayland ]
-then
-	echo "Deleting stale symlinks and files"
-	sudo rm -rf $PREFIX/xwayland/wayland-0
-	rm $PREFIX/xwayland
-fi
 
 
 }
