@@ -2,6 +2,7 @@
 
 DEPLOY=/data/user/0/ru.meefik.linuxdeploy/files/bin/linuxdeploy
 CHROOT_DIR=/data/local/mnt
+ANDROIDVERSION=$(getprop ro.build.version.release | cut -f1,2 -d '.')
 
 echo -e "Installing all dependencies and setting up storage permissions"
 
@@ -45,6 +46,12 @@ echo -e "\nInstalling Linux Deploy app"
 wget https://github.com/meefik/linuxdeploy/releases/download/2.6.0/linuxdeploy-2.6.0-259.apk
 sudo pm install linuxdeploy-2.6.0-259.apk
 sudo rm -rf linuxdeploy-2.6.0-259.apk
+
+if (( $(echo "$ANDROIDVERSION >= 11" | bc -l) ))
+then
+    echo -e "I detected you are running Android 11 or newer which makes this script unlikely to work because of scoped storage restrictions. Attempting to fix, can't guarantee it will work"
+    su -c cmd appops set ru.meefik.linuxdeploy android:legacy_storage allow
+fi
 
 echo -e "\nCopying config"
 
