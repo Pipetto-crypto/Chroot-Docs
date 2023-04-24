@@ -1,3 +1,10 @@
+THIS PROJECT IS DEPRECATED, LINKS TO NEWER PROJECTS
+
+https://github.com/Pipetto-crypto/Chroot-Installer
+
+https://github.com/Pipetto-crypto/3in1ProotX86Emus
+
+
 WARNING: These scripts here and this guide has been tested to work on Android 7-10. On newer Android versions it is unlikely to work because of scoped storage restrictions. A new version independent from LinuxDeploy app will be published in the nearby future
 
 
